@@ -1018,7 +1018,6 @@ using ::std::tuple_size;
 #endif  // __clang__
 
 namespace testing {
-
 class Message;
 
 #if defined(GTEST_TUPLE_NAMESPACE_)
@@ -1033,7 +1032,6 @@ using GTEST_TUPLE_NAMESPACE_::tuple_element;
 #endif  // defined(GTEST_TUPLE_NAMESPACE_)
 
 namespace internal {
-
 // A secret type that Google Test users don't know about.  It has no
 // definition on purpose.  Therefore it's impossible to create a
 // Secret object, which is what we want.
@@ -1946,7 +1944,7 @@ class MutexBase {
 // This allows initialization to work whether pthread_t is a scalar or struct.
 // The flag -Wmissing-field-initializers must not be specified for this to work.
 #  define GTEST_DEFINE_STATIC_MUTEX_(mutex) \
-     ::testing::internal::MutexBase mutex = { PTHREAD_MUTEX_INITIALIZER, false }
+     ::testing::internal::MutexBase mutex = { PTHREAD_MUTEX_INITIALIZER, false, 0 }
 
 // The Mutex class can only be used for mutexes created at runtime. It
 // shares its API with MutexBase otherwise.
@@ -2237,7 +2235,6 @@ inline std::string StripTrailingSpaces(std::string str) {
 // as the wrapped function.
 
 namespace posix {
-
 // Functions with a different name on Windows.
 
 #if GTEST_OS_WINDOWS
@@ -2351,7 +2348,6 @@ void Abort();
 #else
 inline void Abort() { abort(); }
 #endif  // GTEST_OS_WINDOWS_MOBILE
-
 }  // namespace posix
 
 // MSVC "deprecates" snprintf and issues warnings wherever it is used.  In
@@ -2476,9 +2472,7 @@ bool ParseInt32(const Message& src_text, const char* str, Int32* value);
 bool BoolFromGTestEnv(const char* flag, bool default_val);
 GTEST_API_ Int32 Int32FromGTestEnv(const char* flag, Int32 default_val);
 const char* StringFromGTestEnv(const char* flag, const char* default_val);
-
 }  // namespace internal
 }  // namespace testing
 
 #endif  // GTEST_INCLUDE_GTEST_INTERNAL_GTEST_PORT_H_
-
